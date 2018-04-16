@@ -15,16 +15,18 @@
         <div class="row">
             <div class="centerSlogan"><h1>Login & explore</h1><br><p>Login and start exploring this wonderfull website.</p></div>
                 <div class="loginFormCenter">
+                <form method="POST" action="/users/login">
                     <div class="form-group">
                     <label for="usr">Username</label>
-                    <input type="text" class="form-control" id="usr">
+                    <input type="text" class="form-control" id="usr" name="usr">
                     </div>
                     <div class="form-group">
                     <label for="usr">Password</label>
-                    <input type="text" class="form-control" id="usr">
+                    <input type="password" class="form-control" id="pwd" name="pwd">
                     </div>
-                    <button type="button" class="btn btn-outline-success">Login</button>
+                    <button type="submit" class="btn btn-outline-success">Login</button>
                     <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#openModal">I don't have an account</button>
+                </form>
                 </div>
 
                 <!--- This is the modal part of the index.html -->

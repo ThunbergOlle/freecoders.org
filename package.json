@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/Gameman2110/freecoders.org#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
+    "cookie-parser": "^1.4.3",
     "ejs": "^2.5.8",
     "express-validator": "^5.1.2",
     "mongodb": "^2.2.33",
