@@ -1,0 +1,39 @@
+H1 {
+    font-family: sans-serif, monospace;
+    font-size: 18px;
+    font-weight: bold;
+    color: #006600;
+    letter-spacing: 1.4px;
+    border-bottom: solid 1px #006600;
+    text-transform: uppercase;
+}
+H2 {
+    font-family: sans-serif, monospace;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 1.2px;
+    color: #009900;
+}
+P, BLOCKQUOTE {
+    font-family: sans-serif, monospace;
+    font-size: 11px;
+    color: #555555;
+    line-height: 1.5;
+    letter-spacing: .25px;
+}
+BLOCKQUOTE {
+    font-family: sans-serif, monospace;
+    font-style: italic;
+    color: #444444;
+    letter-spacing: 1.25px;
+    line-height: 1.5;
+    background: #EEEEEE;
+    padding: 5px;
+    margin: auto 15px;
+}
+A {
+    color: #006600;
+}
+ABBR {
+    border-bottom: dotted 1px #006600;
+}

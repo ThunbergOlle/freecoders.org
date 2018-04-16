@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        
+        <link rel="stylesheet" type="text/css" href="logincss.css">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="index.html">FreeCoders.org</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+     
+        <a class="nav-link" href="#">Applications<span class="sr-only">(current)</span></a>
+      
+      
+        <a class="nav-link" href="#">Mods</a>
+      
+       <a class="nav-link" href="plugins.html">Plugins<span class="sr-only">(current)</span></a>
+    
+      <a class="nav-link disabled" href="#">Users</a>
+      
+      <a class="nav-link" href="login.html">Login<span class="sr-only">(current)</span></a>
+      
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+        
+
+
+
+
+    </nav>
+
+        <!--- Required libraries for the front end and javascript part.-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="./css/style.css">
+        <script src="login.js"></script>
+    </head>
+    <body>
+        <div class="row">
+            <div class="centerSlogan"><h1>Login & explore</h1><br><p>Login and start exploring this wonderful website.</p></div>
+                <div class="loginFormCenter">
+                    <div class="form-group">
+                    <label for="usr">Username</label>
+                    <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="form-group">
+                    <label for="usr">Password</label>
+                    <input type="text" class="form-control" id="usr">
+                    </div>
+                    <button type="button" class="btn btn-outline-success">Login</button>
+                    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#openModal">I don't have an account</button>
+                </div>
+
+                <!--- This is the modal part of the index.html -->
+                <div class="modal fade" id="openModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Signup</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="signupusr">What's your username?</label>
+                                    <input type="text" class="form-control" id="signupusr">
+                                </div>
+                                <div class="form-group">
+                                    <label for="signupemail">Contact Email</label>
+                                    <input type="email" class="form-control" id="signupemail">
+                                </div>
+                                <div class="form-group">
+                                    <label for="signuppwd">Password</label>
+                                    <input type="password" class="form-control" id="signuppwd">
+                                </div>
+                                <div class="form-group">
+                                    <label for="language">Prefered Language</label>
+                                    <select class="form-control" id="language">
+                                        <option>Javascript</option>
+                                        <option>Python</option>
+                                        <option>Java</option>
+                                        <option>C++</option>
+                                        <option>C#</option>
+                                        <option>PHP</option>
+                                        <option>VB</option>
+                                    </select>
+                                </div>
+                                    <button type="button" class="btn btn-outline-success">Sign me up</button>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div></body>
+
+</html>
