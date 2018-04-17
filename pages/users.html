@@ -44,28 +44,112 @@
 
     
     <body>
-    
-    <div class="container">
-  <h2>Profiles</h2>
- 
-  <div class="card" style="width:400px">
-    <img class="card-img-top" src="../images/user_male2-512.png" alt="Card image" style="width:100%">
-    <div class="card-body">
-      <h4 class="card-title">John Doe</h4>
-      <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-      <a href="#" class="btn btn-primary">See Profile</a>
-      </div></div>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+html {
+  box-sizing: border-box;
+}
 
-        
-        <div class="container">
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
-  <div class="card" style="width:400px">
-    <img class="card-img-top" src="../images/user_male2-512.png" alt="Card image" style="width:100%">
-    <div class="card-body">
-      <h4 class="card-title">John Doe</h4>
-      <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-      <a href="#" class="btn btn-primary">See Profile</a>
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+}
+</style>
+
+<body>
+
+<center><br><h2>Profiles</h2>
+    <p>Search in the Top Right.</p></center>
+<br>
+
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <img src="../images/user_male2-512.png" alt="Jane" style="width:100%">
+      <div class="container">
+        <h2>Haywoodmat</h2>
+        <p class="title">Front End Programmer</p>
+        <p>I helped create the website check out my profile!</p>
+        <p>example@gmail.com</p>
+          <p><button class="button"><a href="#"><font color="white">See Profile</font></a></button></p>
+      </div>
     </div>
   </div>
-  
-        </div></div></body>
+
+  <div class="column">
+    <div class="card">
+      <img src="../images/user_male2-512.png" alt="Mike" style="width:100%">
+      <div class="container">
+        <h2>CloudiaN</h2>
+        <p class="title">Website Owner + Front and Back End Programmer</p>
+        <p>I own the website go check me out and leave a rating!</p>
+        <p>example@example.com</p>
+          <p><button class="button"><a href="#"><font color="white">See Profile</font></a></button></p>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card">
+      <img src="../images/user_male2-512.png" alt="John" style="width:100%">
+      <div class="container">
+        <h2>Thio</h2>
+        <p class="title">Website Tester</p>
+        <p>Im a spaz with no friends.</p>
+        <p>example@example.com</p>
+          <p><button class="button"><a href="#"><font color="white">See Profile</font></a></button></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+        </body>
+    </body>
+</html>
