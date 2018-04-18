@@ -62,11 +62,11 @@ app.get('/plugins', function(req, res){
 
     //Creates variable for receivePlugins
     var receivePlugins = plugins.result; 
-    //console.log(receivePlugins);
     
+    //console.log(receivePlugins);
     res.render('plugins', {
         user: user_id,
-        data: JSON.stringify(receivePlugins)
+        plugins: receivePlugins
     });
     
 });
