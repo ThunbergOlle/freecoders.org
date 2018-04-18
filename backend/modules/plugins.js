@@ -6,6 +6,7 @@ module.exports.getplugins = function getplugins(db){
     //Checks the collection "plugins"
     var pluginsDB = db.collection('plugins');
 
+
     //Gets all the plugins information to an array.
     var allplugins = pluginsDB.find({}).toArray(function(err, result){
         if(err) throw err;
@@ -14,5 +15,12 @@ module.exports.getplugins = function getplugins(db){
         //Export the result that we've gotten from the database.
         module.exports.result = res;
     });
+}
+
+module.exports.addplugin = function addplugin(db, addtitle, addapp, adddescription, addlanguage, adduser){
+    var pluginsDB = db.collection('plugins');
+    //Insert into database.
+    pluginsDB.insert({userName: adduser, game: addapp, title: addtitle, description: adddescription, language: addlanguage});
+    module.exports.pluginres = 'Success';
 }
 

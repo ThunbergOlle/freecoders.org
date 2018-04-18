@@ -31,9 +31,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="users">Users</a>
                         </li>
+                        <% if(user == undefined){%>
                         <li class="nav-item">
                             <a class="nav-link" href="login">Login</a>
                         </li>
+                        <%}%>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -47,8 +49,8 @@
 
     <div class="container">
   <br><h2>Plugin Makers</h2>
-  <p>Here is everyone who wants help with their projects.</p>  <button class="btn btn-outline-success my-2 my-sm-0" type="link" title="Add">+</button>
-  <br><br>      
+  <p>Here is everyone who wants help with their projects.</p>  <a class="btn btn-outline-success my-2 my-sm-0" href="addplugin">+</a>
+  <br><br>
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -67,7 +69,7 @@
 </div>
 </th>
         <th>Username</th>
-        <th>Description</th> 
+        <th>Title</th> 
         </tr>
     </thead>
     <tbody>
@@ -76,7 +78,7 @@
                 <td><%= plugins[i].game %></td>
                 <td><%= plugins[i].language %></td>
                 <td><%= plugins[i].userName %></td>
-                <td><%= plugins[i].userName %></td>
+                <td><%= plugins[i].title %></td>
             </tr>
         <%}%>
     </tbody>

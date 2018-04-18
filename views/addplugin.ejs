@@ -1,0 +1,54 @@
+<html lang="en">
+    <head>
+        <title>Add plugin!</title>
+        <!--- Required libraries for the front end and javascript part.-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="row">
+            <div class="loginFormCenter">
+                <form method="POST" action="/plugins/register">
+                    <div class="form-group">
+                        <label for="title">What are you going to make?</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="A small title..">
+                    </div>
+                    <div class="form-group">
+                        <label for="app">What Game / Application are you making a plugin for?</label>
+                        <input type="text" class="form-control" id="app" name="app" placeholder="Only one word...">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Extended description of what you are making..</label>
+                        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for = "language">Select the language you want to use.</label>
+                        <select class="form-control" name="language" id="language">
+                            <option>Javascript</option>
+                            <option>Python</option>
+                            <option>Java</option>
+                            <option>C++</option>
+                            <option>C#</option>
+                            <option>PHP</option>
+                            <option>VB</option>
+                            <option>C</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <% if (user != undefined){ %>
+                    <p>Signed in as: <%= user %></p>
+                    <button type="submit" class="btn btn-outline-success">Get help</button>
+                    <%}%>
+                    <% if (user == undefined){ %>
+                    <a href="login">You have to login before publishing.</a>
+                    <% } %>
+                      
+                </form>
+                
+            </div>
+        </div>
+        
+    </body>

@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser');
 var app = express();
 const SALT_WORK_FACTOR = 10;
 const port = 3000;
-var user_id = '';
+
 //Gets all the modules.
 var plugins = require('./modules/plugins.js');
 
@@ -40,11 +40,11 @@ app.use(session({
 //Handle a get request.
 app.get('/', function(req, res){
     //Renders the login page.
-    
+    console.log(req.session.userName);
     console.log('Someone visisted our page..');
     res.render('index', {
         title: 'FreeCoders', //Passing the title and the current user's id.
-        user: user_id
+        user: req.session.userName
     });
 });
 
@@ -54,25 +54,28 @@ app.get('/login', function(req, res){
         title: 'FreeCoders',
     });
 });
-
+app.get('/addplugin', function(req, res){
+    res.render('addplugin', {
+        user: req.session.userName
+    });
+});
 //If we get an request for the plugins page.
 app.get('/plugins', function(req, res){
     //Get the plugins from the other module's result. (Get it again)
     plugins.getplugins(db);
-
     //Creates variable for receivePlugins
     var receivePlugins = plugins.result; 
     
     //console.log(receivePlugins);
     res.render('plugins', {
-        user: user_id,
+        user: req.session.userName,
         plugins: receivePlugins
     });
     
 });
 app.get('/index', function(req, res){
     res.render('index', {
-        user: user_id
+        user: req.session.userName
     });
 });
 
@@ -122,7 +125,6 @@ app.post('/users/login', function(req, res){
                     //Sets up a new sessions & variables
                     user_id = usr;
                     req.session.userName = user_id;
-                    console.log(user_id);
                     res.redirect('/');
 
                 } else {
@@ -137,7 +139,17 @@ app.post('/users/login', function(req, res){
     });
 
 });
-
+app.post('/plugins/register', function(req, res){
+    console.log('Someone tried to add a new plugin...');
+    var addtitle = req.body.title;
+    var addapp = req.body.app;
+    var adddescription = req.body.description;
+    var addlanguage = req.body.language;
+    var adduser = req.session.userName;
+    plugins.addplugin(db, addtitle, addapp, adddescription, addlanguage, adduser);
+    plugins.getplugins(db);
+    res.redirect('/plugins');
+});
 
 //Listen for incooming connections on the port (3000)
 app.listen(port, function(){
