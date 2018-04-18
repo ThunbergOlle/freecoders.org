@@ -98,6 +98,8 @@ app.post('/users/add', function(req, res){
         //Inserts it into the correct database.
     codedb.insert({user: newUser, email: newEmail, password: newPwd});
     console.log('A user signed up with the username ' + newUser + ' with the email ' + newEmail);
+    req.session.userName = newUser;
+    res.redirect('/');
     console.log('Hashed the password: ' + newPwd);
     } else {
         console.log('Someone tried to signup with an empty field!'); //Logs that someone tried to signup with an empty field.
