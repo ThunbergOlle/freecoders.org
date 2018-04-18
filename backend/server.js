@@ -12,10 +12,13 @@ var app = express();
 const SALT_WORK_FACTOR = 10;
 const port = 3000;
 var user_id = '';
+//Gets all the modules.
+var plugins = require('./modules/plugins.js');
 
 mongo.connect("mongodb://127.0.0.1/freecoders", function(err, db){
+    plugins.getplugins(db);
     if(err) throw err;
-    let codedb = db.collection('freecoders');
+    var codedb = db.collection('freecoders');
     var salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
 //View engine
 app.set('view engine', 'ejs');
@@ -30,30 +33,54 @@ app.use(bodyParser.urlencoded({extended: false}));
 //Express session middleware.
 app.use(cookieParser());
 app.use(session({
-    secret: 'cloud'
+    secret: 'cloud' //This is the secret for the session. Change later...
 }));
 
 
 //Handle a get request.
 app.get('/', function(req, res){
     //Renders the login page.
+    
+    console.log('Someone visisted our page..');
     res.render('index', {
-        title: 'FreeCoders',
+        title: 'FreeCoders', //Passing the title and the current user's id.
         user: user_id
     });
 });
+
+//If a request to the login page.
 app.get('/login', function(req, res){
     res.render('login', {
         title: 'FreeCoders',
-        
     });
 });
+
+//If we get an request for the plugins page.
+app.get('/plugins', function(req, res){
+    //Get the plugins from the other module's result. (Get it again)
+    plugins.getplugins(db);
+
+    //Creates variable for receivePlugins
+    var receivePlugins = plugins.result; 
+    
+    //console.log(receivePlugins);
+    res.render('plugins', {
+        user: user_id,
+        plugins: receivePlugins
+    });
+    
+});
+app.get('/index', function(req, res){
+    res.render('index', {
+        user: user_id
+    });
+});
+
 //Catch Submition
 app.post('/users/add', function(req, res){
     console.log('Signup form submitted');
 
     //Converts all the recieved information into string and better variables.
-    
     var newUser = req.body.signupusr;
     var newEmail = req.body.signupemail;
     var newPwd = req.body.signuppwd;
@@ -74,25 +101,25 @@ app.post('/users/add', function(req, res){
     }
     
 });
+//If we get a post request that we want to login. 
+//The code gets a bit more complicated from now on...
 app.post('/users/login', function(req, res){
     console.log('Someoned tried to sign in.');
-
+    //Sets up temp variables from the input we've gotten from the clients.
     var usr = req.body.usr;
     var pwd = req.body.pwd;
-
+    //Finds if user exists in the Database
     codedb.findOne({user: usr}, function(err, result){
         if (err) throw err;
         //If we get a result in the database then do this.
         if(result != null){
-            //Hash the password to fit the database.
-            
-            
+            //Comparing the password to fit the database.
              bcrypt.compare(pwd, result.password, function(err, response){
                 if(err) throw err;
                 if(response == true){
                     //If we are logged in to the site.
                     console.log('Someone successfully logged into the website. The username is: ' + usr);
-                    
+                    //Sets up a new sessions & variables
                     user_id = usr;
                     req.session.userName = user_id;
                     console.log(user_id);
