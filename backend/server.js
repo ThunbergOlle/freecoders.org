@@ -40,8 +40,7 @@ app.use(session({
 //Handle a get request.
 app.get('/', function(req, res){
     //Renders the login page.
-    console.log(req.session.userName);
-    console.log('Someone visisted our page..');
+    console.log('Someone connected.');
     res.render('index', {
         title: 'FreeCoders', //Passing the title and the current user's id.
         user: req.session.userName
@@ -52,6 +51,7 @@ app.get('/', function(req, res){
 app.get('/login', function(req, res){
     res.render('login', {
         title: 'FreeCoders',
+        success: true
     });
 });
 app.get('/addplugin', function(req, res){
@@ -73,30 +73,62 @@ app.get('/plugins', function(req, res){
     });
     
 });
+app.get('/pluginjava', function(req, res){
+    var languageinfo = 'Java';
+    console.log('Someone wanted to filter: ' + languageinfo);
+    plugins.getlanguage(db, languageinfo);
+    var receivePlugins = plugins.langresult;
+    //console.log(receivePlugins);
+    res.render('pluginjava', {
+        user: req.session.userName,
+        plugins: receivePlugins
+    })
+});
+app.get('/pluginjavascript', function(req, res){
+    var languageinfo = 'Javascript';
+    console.log('Someone wanted to filter: ' + languageinfo);
+    plugins.getlanguage(db, languageinfo);
+    var receivePlugins = plugins.langresult;
+    //console.log(receivePlugins);
+    res.render('pluginjavascript', {
+        user: req.session.userName,
+        plugins: receivePlugins
+    })
+});
+app.get('/plugincsharp', function(req, res){
+    var languageinfo = 'C#';
+    console.log('Someone wanted to filter: ' + languageinfo);
+    plugins.getlanguage(db, languageinfo);
+    var receivePlugins = plugins.langresult;
+    //console.log(receivePlugins);
+    res.render('pluginscsharp', {
+        user: req.session.userName,
+        plugins: receivePlugins
+    })
+});
 app.get('/index', function(req, res){
     res.render('index', {
         user: req.session.userName
     });
 });
 
+
 //Catch Submition
 app.post('/users/add', function(req, res){
-    console.log('Signup form submitted');
 
     //Converts all the recieved information into string and better variables.
     var newUser = req.body.signupusr;
     var newEmail = req.body.signupemail;
     var newPwd = req.body.signuppwd;
-
+    var newLanguage = req.body.language;
     //Hashing the password and place it into the database.
     var hash = bcrypt.hashSync(newPwd, salt);
     newPwd = hash;
-    console.log(newPwd);
     //Checks if the fields are empty or not.
     if(newUser != "" && newEmail != "" && newPwd != ""){
 
         //Inserts it into the correct database.
-    codedb.insert({user: newUser, email: newEmail, password: newPwd});
+    codedb.insert({user: newUser, email: newEmail, password: newPwd, language: newLanguage});
     console.log('A user signed up with the username ' + newUser + ' with the email ' + newEmail);
     req.session.userName = newUser;
     res.redirect('/');
@@ -109,7 +141,7 @@ app.post('/users/add', function(req, res){
 //If we get a post request that we want to login. 
 //The code gets a bit more complicated from now on...
 app.post('/users/login', function(req, res){
-    console.log('Someoned tried to sign in.');
+    
     //Sets up temp variables from the input we've gotten from the clients.
     var usr = req.body.usr;
     var pwd = req.body.pwd;
@@ -132,17 +164,20 @@ app.post('/users/login', function(req, res){
                 } else {
                     //OOPS, wrong password :///
                     console.log(usr + ' tried to login with the wrong password.');
+                    res.redirect('/login?password=false');
                 }
              });
              
         } else {
             console.log('Somone tried to login with a false username.');
+            res.redirect('/login?username=false');
         }
     });
 
 });
 app.post('/plugins/register', function(req, res){
     console.log('Someone tried to add a new plugin...');
+    //Get all the information from the client's request.
     var addtitle = req.body.title;
     var addapp = req.body.app;
     var adddescription = req.body.description;

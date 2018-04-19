@@ -24,3 +24,15 @@ module.exports.addplugin = function addplugin(db, addtitle, addapp, adddescripti
     module.exports.pluginres = 'Success';
 }
 
+//Module that gets information and reads from database.
+module.exports.getlanguage = function getlanguage(db, languageinfo){
+    var pluginsDB = db.collection('plugins');
+
+    pluginsDB.find({ "language": languageinfo}).toArray(function(err, result){
+        if(err) throw err;
+        
+        var res = result;
+        
+        module.exports.langresult = res;
+    });
+}

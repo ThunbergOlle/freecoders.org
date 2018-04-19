@@ -60,10 +60,10 @@
           <th><div class="dropup">
   <button class="dropbtn">Language</button>
   <div class="dropup-content">
-    <a href="pluginsjava.html">Java</a>
-    <a href="#">JavaScript</a>
-    <a href="pluginscsharp.html">C#</a>
-    <a href="plugins.html">All</a>  
+    <a href="pluginjava">Java</a>
+    <a href="pluginjavascript">JavaScript</a>
+    <a href="pluginscsharp">C#</a>
+    <a href="plugins">All</a>  
       
 </div>
 </div>
@@ -76,12 +76,15 @@
         <% for (var i = 0; i < plugins.length; i++){%>
             <tr>
                 <td><%= plugins[i].game %></td>
-                <td><%= plugins[i].language %></td>
-                <td><%= plugins[i].userName %></td>
+                <td id="<%= plugins[i].language %>"><%= plugins[i].language %></td>
+                <td><%= plugins[i].userName %></a></td>
                 <td><%= plugins[i].title %></td>
             </tr>
         <%}%>
     </tbody>
   </table>
 </div>
+<script>
+    
+</script>
 </body>

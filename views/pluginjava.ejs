@@ -43,25 +43,5 @@
                 </form>
             </div>
         </nav>
-        <div class="row">
-            <div class="centerSlogan">
-            <% if(user == undefined){%>
-            <h1>We love coding</h1>
-            <% } else { %>
-            <h1>Welcome <%= user %> to FreeCoders!</h1>
-            <% } %>
-            <br>
-            <p>
-                Freecoders in a website for small developers to get to know a community and make awesome<br> products together. All from helping with modding to real applications.
-            </p>
-            <% if(user == undefined){ %>
-            <button type="button bg-light" class="btn btn-outline-success" id="btnIndexPOS">Read more</button>
-            <% } else { %>
-            <a type="button bg-light" class="btn btn-outline-success" id="btnIndexPOS" href="#">Explore</a>
-            <% } %>
-            </div>
-  
-        </div>
-
     </body>
 </html>
