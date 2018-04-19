@@ -9,6 +9,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script src="../pages/scripts/plugins.js"></script>
         <link rel="stylesheet" href="plugins.css">
     </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -65,31 +66,19 @@
 </div>
 </div>
 </th>
-
-    
         <th>Username</th>
         <th>Description</th> 
         </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>GTA V</td>
-        <td>Java</td>
-          <td><a class="nav-link" href="#">Haywoodmat</a></td>
-      <td>LS POLICE DEPARTMENT PLUGIN, TURNS YOU INTO A COP IF YOU VISIT POLICE STATION. CHECK IT OUT ON MY ACCOUNT!</td>
-        </tr>
-      <tr>
-        <td>Rust</td>
-        <td>Java</td>
-          <td><a class="nav-link" href="#"> Cloudian</a></td>
-      <td>FULLY FUNCTIONAL POLICE BOAT. PLUG IN FOR SERVER.</td>
-        </tr>
-      <tr>
-        <td>ARK: Survival Evolved</td>
-        <td>Java</td>
-          <td><a class="nav-link" href="#">Thio</a></td>
-      <td>BIG KILLER DINOSAUR WITH MINIGUNS!!!!!</td>
-        </tr>
+        <% for (var i = 0; i < plugins.length; i++){%>
+            <tr>
+                <td><%= plugins[i].game %></td>
+                <td><%= plugins[i].language %></td>
+                <td><%= plugins[i].userName %></td>
+                <td><%= plugins[i].userName %></td>
+            </tr>
+        <%}%>
     </tbody>
   </table>
 </div>
