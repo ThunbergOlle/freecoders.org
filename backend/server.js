@@ -88,6 +88,7 @@ app.get('/pluginjava', function(req, res){
             languageinfo = '';
         }
     }
+    //Waits for a response.
     setTimeout(check, 200);
 
 });
@@ -106,7 +107,9 @@ app.get('/pluginjavascript', function(req, res){
                         languageinfo = '';
                 }
             }
-            setTimeout(check, 200);
+            //Waits for a response.
+
+    setTimeout(check, 200);
 
 });
 app.get('/plugincsharp', function(req, res){
