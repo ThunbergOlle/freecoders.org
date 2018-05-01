@@ -14,6 +14,7 @@ const port = 3000;
 
 //Gets all the modules.
 var plugins = require('./modules/plugins.js');
+var users = require('./modules/users.js');
 
 mongo.connect("mongodb://127.0.0.1/freecoders", function(err, db){
     plugins.getplugins(db);
@@ -46,7 +47,23 @@ app.get('/', function(req, res){
         user: req.session.userName
     });
 });
+app.get('/users', function(req, res){
 
+    users.getusers(db);
+    function check(){
+        if(users.result != undefined){
+            var recieveUsers = users.result;
+            console.log(recieveUsers);
+            res.render('users', {
+                user: req.session.userName
+            });
+        }
+    }
+            //Waits for a response.
+
+    setTimeout(check, 100);
+
+});
 //If a request to the login page.
 app.get('/login', function(req, res){
     res.render('login', {
