@@ -8,7 +8,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="plugins.css">
 
     </head>
     <body>
@@ -43,5 +43,42 @@
                 </form>
             </div>
         </nav>
+        <div class="container">
+  <br><h2>Plugin Makers</h2>
+  <p>Here is everyone who wants help with their projects.</p>  <a class="btn btn-outline-success my-2 my-sm-0" href="addplugin">+</a>
+  <br><br>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        
+          <th>Game</th>
+
+          <th><div class="dropup">
+  <button class="dropbtn">Language</button>
+  <div class="dropup-content">
+    <a href="pluginjava">Java</a>
+    <a href="pluginjavascript">JavaScript</a>
+    <a href="pluginscsharp">C#</a>
+    <a href="plugins">All</a>  
+      
+</div>
+</div>
+</th>
+        <th>Username</th>
+        <th>Title</th> 
+        </tr>
+    </thead>
+    <tbody>
+        <% for (var i = 0; i < plugins.length; i++){%>
+            <tr>
+                <td><%= plugins[i].game %></td>
+                <td id="<%= plugins[i].language %>"><%= plugins[i].language %></td>
+                <td><%= plugins[i].userName %></a></td>
+                <td><%= plugins[i].title %></td>
+            </tr>
+        <%}%>
+    </tbody>
+  </table>
+</div>
     </body>
 </html>

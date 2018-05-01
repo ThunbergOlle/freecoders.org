@@ -77,23 +77,37 @@ app.get('/pluginjava', function(req, res){
     var languageinfo = 'Java';
     console.log('Someone wanted to filter: ' + languageinfo);
     plugins.getlanguage(db, languageinfo);
-    var receivePlugins = plugins.langresult;
-    //console.log(receivePlugins);
-    res.render('pluginjava', {
-        user: req.session.userName,
-        plugins: receivePlugins
-    })
+    function check(){
+        if(plugins.langresult[0].language == languageinfo){
+            var receivePlugins = plugins.langresult;
+        //    console.log(receivePlugins);
+            res.render('pluginjava', {
+                user: req.session.userName,
+                plugins: receivePlugins
+            });
+            languageinfo = '';
+        }
+    }
+    setTimeout(check, 200);
+
 });
 app.get('/pluginjavascript', function(req, res){
-    var languageinfo = 'Javascript';
-    console.log('Someone wanted to filter: ' + languageinfo);
-    plugins.getlanguage(db, languageinfo);
-    var receivePlugins = plugins.langresult;
-    //console.log(receivePlugins);
-    res.render('pluginjavascript', {
-        user: req.session.userName,
-        plugins: receivePlugins
-    })
+            var languageinfo = 'Javascript';
+            console.log('Someone wanted to filter: ' + languageinfo);
+            plugins.getlanguage(db, languageinfo);
+            function check(){
+                if(plugins.langresult[0].language == languageinfo) {
+                        var receivePlugins = plugins.langresult;
+                    //    console.log(receivePlugins);
+                        res.render('pluginjavascript', {
+                            user: req.session.userName,
+                            plugins: receivePlugins
+                        });
+                        languageinfo = '';
+                }
+            }
+            setTimeout(check, 200);
+
 });
 app.get('/plugincsharp', function(req, res){
     var languageinfo = 'C#';

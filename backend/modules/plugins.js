@@ -32,7 +32,7 @@ module.exports.getlanguage = function getlanguage(db, languageinfo){
         if(err) throw err;
         
         var res = result;
-        
         module.exports.langresult = res;
+        //FULLY WORKING MODULE. NO BUGGS OR ANYTHING TESTED BY OLLE.        
     });
 }
