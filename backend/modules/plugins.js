@@ -5,8 +5,6 @@ const mongo = require('mongodb').MongoClient;
 module.exports.getplugins = function getplugins(db){
     //Checks the collection "plugins"
     var pluginsDB = db.collection('plugins');
-
-
     //Gets all the plugins information to an array.
     var allplugins = pluginsDB.find({}).toArray(function(err, result){
         if(err) throw err;
@@ -30,7 +28,6 @@ module.exports.getlanguage = function getlanguage(db, languageinfo){
 
     pluginsDB.find({ "language": languageinfo}).toArray(function(err, result){
         if(err) throw err;
-        
         var res = result;
         module.exports.langresult = res;
         //FULLY WORKING MODULE. NO BUGGS OR ANYTHING TESTED BY OLLE.        

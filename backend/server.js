@@ -24,12 +24,11 @@ mongo.connect("mongodb://127.0.0.1/freecoders", function(err, db){
 //View engine
 app.set('view engine', 'ejs');
 //Specify folder we want to use
-app.use(express.static(path.join(__dirname, '../pages/css')));
+app.use(express.static(path.join(__dirname, '../public')));
 app.set('views', path.join(__dirname, '../views'));
 //Body parser middleware.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-
 
 //Express session middleware.
 app.use(cookieParser());
@@ -129,16 +128,23 @@ app.get('/pluginjavascript', function(req, res){
     setTimeout(check, 200);
 
 });
-app.get('/plugincsharp', function(req, res){
+app.get('/pluginscsharp', function(req, res){
     var languageinfo = 'C#';
     console.log('Someone wanted to filter: ' + languageinfo);
     plugins.getlanguage(db, languageinfo);
-    var receivePlugins = plugins.langresult;
-    //console.log(receivePlugins);
-    res.render('pluginscsharp', {
-        user: req.session.userName,
-        plugins: receivePlugins
-    })
+            function check(){
+                if(plugins.langresult[0].language == languageinfo) {
+                        var receivePlugins = plugins.langresult;
+                    //    console.log(receivePlugins);
+                        res.render('pluginscsharp', {
+                            user: req.session.userName,
+                            plugins: receivePlugins
+                        });
+                        languageinfo = '';
+                }
+            }
+    setTimeout(check, 200);
+
 });
 app.get('/index', function(req, res){
     res.render('index', {

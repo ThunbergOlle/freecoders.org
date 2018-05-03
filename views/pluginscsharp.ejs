@@ -1,0 +1,84 @@
+<html lang="en">
+    <head>
+        <title>Freecoders</title>
+
+
+        <!--- Required libraries for the front end and javascript part.-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="plugins.css">
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index">FreeCoders.org</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="applications">Applications</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="mods">Mods</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="plugins">Plugins</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="users">Users</a>
+                        </li>
+                        <% if(user == undefined){%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login">Login</a>
+                        </li>
+                        <%}%>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+        <div class="container">
+  <br><h2>Plugin Makers</h2>
+  <p>Here is everyone who wants help with their projects.</p>  <a class="btn btn-outline-success my-2 my-sm-0" href="addplugin">+</a>
+  <br><br>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        
+          <th>Game</th>
+
+          <th><div class="dropup">
+  <button class="dropbtn">Language</button>
+  <div class="dropup-content">
+    <a href="pluginjava">Java</a>
+    <a href="pluginjavascript">JavaScript</a>
+    <a href="pluginscsharp">C#</a>
+    <a href="plugins">All</a>  
+      
+</div>
+</div>
+</th>
+        <th>Username</th>
+        <th>Title</th> 
+        </tr>
+    </thead>
+    <tbody>
+        <% for (var i = 0; i < plugins.length; i++){%>
+            <tr>
+                <td><%= plugins[i].game %></td>
+                <td id="<%= plugins[i].language %>"><%= plugins[i].language %></td>
+                <td><%= plugins[i].userName %></a></td>
+                <td><%= plugins[i].title %></td>
+            </tr>
+        <%}%>
+    </tbody>
+  </table>
+</div>
+    </body>
+</html>
