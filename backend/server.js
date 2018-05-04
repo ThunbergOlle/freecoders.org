@@ -46,21 +46,27 @@ app.get('/', function(req, res){
         user: req.session.userName
     });
 });
+app.get('/privacy', function(req, res){
+    res.render('privacy', {
+        user: req.session.userName
+    });
+});
 app.get('/users', function(req, res){
 
+    //Calls a function from another script with the input of the current db connections
     users.getusers(db);
-    function check(){
+    function check(){ //Function just so we know that the right things are displayed on the website
         if(users.result != undefined){
-            var recieveUsers = users.result;
-            console.log(recieveUsers);
+            var allusers = users.result;
             res.render('users', {
-                user: req.session.userName
+                user: req.session.userName,
+                allusers: allusers
             });
         }
     }
             //Waits for a response.
 
-    setTimeout(check, 100);
+    setTimeout(check, 100); 
 
 });
 //If a request to the login page.
@@ -110,12 +116,11 @@ app.get('/pluginjava', function(req, res){
 });
 app.get('/pluginjavascript', function(req, res){
             var languageinfo = 'Javascript';
-            console.log('Someone wanted to filter: ' + languageinfo);
+            console.log('Someone wanted to filter: ' + languageinfo); //Logs that someone filters the language.
             plugins.getlanguage(db, languageinfo);
-            function check(){
-                if(plugins.langresult[0].language == languageinfo) {
-                        var receivePlugins = plugins.langresult;
-                    //    console.log(receivePlugins);
+            function check(){ //Function for checking the content in the database
+                if(plugins.langresult[0].language == languageinfo) { //If we get a result that has some kind of index.
+                        var receivePlugins = plugins.langresult; //Sets up variable for the recieved plugins gotten from the database.
                         res.render('pluginjavascript', {
                             user: req.session.userName,
                             plugins: receivePlugins
@@ -161,6 +166,8 @@ app.post('/users/add', function(req, res){
     var newEmail = req.body.signupemail;
     var newPwd = req.body.signuppwd;
     var newLanguage = req.body.language;
+    var newDeveloper = req.body.developer;
+    var newDesc = req.body.desc;
     //Hashing the password and place it into the database.
     var hash = bcrypt.hashSync(newPwd, salt);
     newPwd = hash;
@@ -168,7 +175,7 @@ app.post('/users/add', function(req, res){
     if(newUser != "" && newEmail != "" && newPwd != ""){
 
         //Inserts it into the correct database.
-    codedb.insert({user: newUser, email: newEmail, password: newPwd, language: newLanguage});
+    codedb.insert({user: newUser, email: newEmail, password: newPwd, language: newLanguage, developer: newDeveloper, description: newDesc});
     console.log('A user signed up with the username ' + newUser + ' with the email ' + newEmail);
     req.session.userName = newUser;
     res.redirect('/');
@@ -223,6 +230,7 @@ app.post('/plugins/register', function(req, res){
     var adddescription = req.body.description;
     var addlanguage = req.body.language;
     var adduser = req.session.userName;
+    //Adds the plugin to the database
     plugins.addplugin(db, addtitle, addapp, adddescription, addlanguage, adduser);
     plugins.getplugins(db);
     res.redirect('/plugins');

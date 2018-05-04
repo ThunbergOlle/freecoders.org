@@ -8,12 +8,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">FreeCoders.org</a>
+            <a class="navbar-brand" href="index">FreeCoders.org</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -111,55 +111,21 @@ html {
     <p>Search in the Top Right.</p></center>
 <br>
 <div class="row" style="margin-left: 15%; margin-right: 15%;">
+  <% for (var i = 0; i < allusers.length; i++){%>
   <div class="column">
     <div class="card">
-      <img src="../images/user_male2-512.png" alt="Jane" style="width:100%">
+      <img src="/images/defaultuser.png" alt="Jane" style="width:100%">
       <div class="container">
-        <h2>Haywoodmat</h2>
-        <p class="title">Front End Programmer</p>
-        <p>I helped create the website check out my profile!</p>
-        <p>example@gmail.com</p>
-          <p><button class="button"><a href="#"><font color="white">See Profile</font></a></button></p>
+        <h2><%= allusers[i].user %></h2>
+        <p class="title"><%= allusers[i].developer %></p>
+        <p><%= allusers[i].description %></p>
+        <p><%= allusers[i].email %></p>
+          <p><button class="button"><a href="#"><font color="white">Contact <%= allusers[i].user %></font></a></button></p>
       </div>
     </div>
   </div>
+  <%}%>
 
-  <div class="column">
-    <div class="card">
-      <img src="../images/user_male2-512.png" alt="Mike" style="width:100%">
-      <div class="container">
-        <h2>CloudiaN</h2>
-        <p class="title">Website Owner + Front and Back End Programmer</p>
-        <p>I own the website go check me out and leave a rating!</p>
-        <p>example@example.com</p>
-          <p><button class="button"><a href="#"><font color="white">See Profile</font></a></button></p>
-      </div>
-    </div>
-  </div>
-  <div class="column">
-    <div class="card">
-      <img src="../images/user_male2-512.png" alt="John" style="width:100%">
-      <div class="container">
-        <h2>Thio</h2>
-        <p class="title">Website Tester</p>
-        <p>Im a spaz with no friends.</p>
-        <p>example@example.com</p>
-          <p><button class="button"><a href="#"><font color="white">See Profile</font></a></button></p>
-      </div>
-    </div>
-  </div>
-    <div class="column">
-    <div class="card">
-      <img src="../images/user_male2-512.png" alt="John" style="width:100%">
-      <div class="container">
-        <h2>Thio</h2>
-        <p class="title">Website Tester</p>
-        <p>Im a spaz with no friends.</p>
-        <p>example@example.com</p>
-          <p><button class="button"><a href="#"><font color="white">See Profile</font></a></button></p>
-      </div>
-    </div>
-  </div>
 </div>
 
 </body>
