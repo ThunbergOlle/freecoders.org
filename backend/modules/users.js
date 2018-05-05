@@ -10,3 +10,13 @@ module.exports.getusers = function getusers(db){
         module.exports.result = res;
     });
 }
+
+module.exports.getprofile = function profile(db, name){
+    var usersDB = db.collection('freecoders');
+    var target = name.replace(/\s+/g, '');
+    usersDB.findOne({user: target}, function(err, result){
+        if(err) throw err;
+        var res = result;
+        module.exports.profileres = res;
+    });
+}

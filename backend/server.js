@@ -81,6 +81,21 @@ app.get('/addplugin', function(req, res){
         user: req.session.userName
     });
 });
+app.get('/profile:name', function(req, res) {
+    var profilename = req.params.name;
+    users.getprofile(db, profilename);
+        function check() {
+            if (users.profileres != undefined){
+                var recievedProfile = users.profileres;
+                console.log(recievedProfile);
+                res.render('profile', {
+                    user: req.session.userName,
+                    profile: recievedProfile
+                });
+            }
+        }
+    setTimeout(check, 100); 
+});
 //If we get an request for the plugins page.
 app.get('/plugins', function(req, res){
     //Get the plugins from the other module's result. (Get it again)
