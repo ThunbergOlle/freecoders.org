@@ -12,11 +12,13 @@ module.exports.getusers = function getusers(db){
 }
 
 module.exports.getprofile = function profile(db, name){
+    //SETS COLLECTION
     var usersDB = db.collection('freecoders');
-    var target = name.replace(/\s+/g, '');
-    usersDB.findOne({user: target}, function(err, result){
+
+    var target = name.replace(/\s+/g, ''); //MODIFY the string.
+    usersDB.findOne({user: target}, function(err, result){ //Find in database will a callback of err, & the result
         if(err) throw err;
         var res = result;
-        module.exports.profileres = res;
+        module.exports.profileres = res; //reponse that the server will recieve.
     });
 }

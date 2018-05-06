@@ -118,9 +118,11 @@ html {
       <div class="container">
         <h2><%= allusers[i].user %></h2>
         <p class="title"><%= allusers[i].developer %></p>
-        <p><%= allusers[i].description %></p>
+        <% if (allusers[i].description != undefined){ %>
+        <p><%= allusers[i].description.substring(0, 50) %>...</p>
+        <% } %>
         <p><%= allusers[i].email %></p>
-          <p><button class="button"><a href="#"><font color="white">Contact <%= allusers[i].user %></font></a></button></p>
+          <p><button class="button"><a href="/profile <%= allusers[i].user %>"><font color="white">View Profile</font></a></button></p>
       </div>
     </div>
   </div>

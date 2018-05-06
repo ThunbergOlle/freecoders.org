@@ -58,6 +58,7 @@ app.get('/users', function(req, res){
     function check(){ //Function just so we know that the right things are displayed on the website
         if(users.result != undefined){
             var allusers = users.result;
+            delete allusers.password;
             res.render('users', {
                 user: req.session.userName,
                 allusers: allusers
@@ -87,7 +88,7 @@ app.get('/profile:name', function(req, res) {
         function check() {
             if (users.profileres != undefined){
                 var recievedProfile = users.profileres;
-                console.log(recievedProfile);
+                delete recievedProfile.password;
                 res.render('profile', {
                     user: req.session.userName,
                     profile: recievedProfile
