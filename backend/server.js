@@ -7,40 +7,45 @@ const mongo = require('mongodb').MongoClient;
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const colors = require('colors');
 //Creates new constructors.
+
 var app = express();
 const SALT_WORK_FACTOR = 10;
 const port = 3000;
-
+console.log('MODULES: OK'.green);
 //Gets all the modules.
 var plugins = require('./modules/plugins.js');
 var users = require('./modules/users.js');
-
+console.log('EXTERNAL MODULES: OK'.green);
 mongo.connect("mongodb://127.0.0.1/freecoders", function(err, db){
+    console.log('DATABASE: OK'.green);
     plugins.getplugins(db);
     if(err) throw err;
     var codedb = db.collection('freecoders');
     var salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
 //View engine
 app.set('view engine', 'ejs');
+console.log('VIEWENGINE: OK'.green);
 //Specify folder we want to use
 app.use(express.static(path.join(__dirname, '../public')));
 app.set('views', path.join(__dirname, '../views'));
+console.log('STATICPAGE: OK'.green);
 //Body parser middleware.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-
+console.log('BODYPARSER: OK'.green);
 //Express session middleware.
 app.use(cookieParser());
 app.use(session({
     secret: 'cloud' //This is the secret for the session. Change later...
 }));
-
+console.log('SESSIONSSECRET: OK'.green);
 
 //Handle a get request.
 app.get('/', function(req, res){
     //Renders the login page.
-    console.log('Someone connected.');
+    console.log('Someone connected.'.green);
     res.render('index', {
         title: 'FreeCoders', //Passing the title and the current user's id.
         user: req.session.userName
@@ -96,6 +101,20 @@ app.get('/profile:name', function(req, res) {
             }
         }
     setTimeout(check, 100); 
+});
+app.get('/plugininfo:id', function(req, res) {
+    var pluginid = req.params.id;
+    plugins.getpluginid(db, pluginid);
+        function check() {
+            if(plugins.getpluginidres != undefined){
+                var recievedPlugin = plugins.getpluginidres;
+                res.render('plugininfo', {
+                    user: req.session.userName,
+                    recievedPlugins: recievedPlugin
+                });
+            }
+        }
+    setTimeout(check, 100);
 });
 //If we get an request for the plugins page.
 app.get('/plugins', function(req, res){
@@ -172,7 +191,11 @@ app.get('/index', function(req, res){
         user: req.session.userName
     });
 });
-
+app.get('/myprofile', function(req, res) {
+    res.render('myprofile', {
+        user: req.session.userName
+    });
+});
 
 //Catch Submition
 app.post('/users/add', function(req, res){
@@ -192,12 +215,12 @@ app.post('/users/add', function(req, res){
 
         //Inserts it into the correct database.
     codedb.insert({user: newUser, email: newEmail, password: newPwd, language: newLanguage, developer: newDeveloper, description: newDesc});
-    console.log('A user signed up with the username ' + newUser + ' with the email ' + newEmail);
+    console.log('A user signed up with the username '.green + newUser.yellow + ' with the email '.green + newEmail.yellow);
     req.session.userName = newUser;
     res.redirect('/');
-    console.log('Hashed the password: ' + newPwd);
+    console.log('Hashed the password: '.green + newPwd.yellow);
     } else {
-        console.log('Someone tried to signup with an empty field!'); //Logs that someone tried to signup with an empty field.
+        console.log('Someone tried to signup with an empty field!'.red); //Logs that someone tried to signup with an empty field.
     }
     
 });
@@ -218,7 +241,7 @@ app.post('/users/login', function(req, res){
                 if(err) throw err;
                 if(response == true){
                     //If we are logged in to the site.
-                    console.log('Someone successfully logged into the website. The username is: ' + usr);
+                    console.log('Someone successfully logged into the website. The username is: '.green + usr.yellow);
                     //Sets up a new sessions & variables
                     user_id = usr;
                     req.session.userName = user_id;
@@ -226,13 +249,13 @@ app.post('/users/login', function(req, res){
 
                 } else {
                     //OOPS, wrong password :///
-                    console.log(usr + ' tried to login with the wrong password.');
+                    console.log(usr.yellow + ' tried to login with the wrong password.'.red);
                     res.redirect('/login?password=false');
                 }
              });
              
         } else {
-            console.log('Somone tried to login with a false username.');
+            console.log('Somone tried to login with a false username.'.red);
             res.redirect('/login?username=false');
         }
     });
@@ -251,9 +274,9 @@ app.post('/plugins/register', function(req, res){
     plugins.getplugins(db);
     res.redirect('/plugins');
 });
-
 //Listen for incooming connections on the port (3000)
 app.listen(port, function(){
-console.log('Server Running on port 3000');
+console.log('SERVER: OK'.green)
+console.log('Server Running on port 3000'.yellow);
 });
 });

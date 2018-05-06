@@ -6,7 +6,7 @@ module.exports.getusers = function getusers(db){
 
     var allusers = usersDB.find({}).toArray(function(err, result){
         var res = result;
-        //console.log(res);
+        res.reverse();
         module.exports.result = res;
     });
 }
