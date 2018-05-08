@@ -96,30 +96,45 @@ html {
   cursor: pointer;
   width: 100%;
 }
+.button1 {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 50%;
+}
+.button4 {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 12px;
+  color: white;
+  background-color: gray;
+  text-align: center;
+  cursor: pointer;
+  width: 25%;
+}
 
+            
+            
+            
 .button:hover {
   background-color: #555;
 }
-
-.img3 {
-  width: 10%;
-  height 10%;
-   
-                
-                
-                
-            }
-        
-        </style>  
+</style>  
         <br>
         <div class="column">
     <div class="card">
-        <center><img src="../images/user_male2-512.png" alt="John" style="width:30%"></center>
-      <div class="container">
-        <h2>Haywoodmat</h2>
-        <p class="title">Front End Programmer</p>
-        <p>One of the main creators of the website. Im 13 and from UK.</p>
-        <p>example@example.com</p>
+        <center><img src="../images/user_male2-512.png" alt="John" style="width:30%"></center><br> <Center><button class="button4"><a href="#"><font color="white">Upload Image</font></a></button></Center>
+      <div class="container"><br>
+        <h2>Haywoodmat</h2><br>
+        <p class="title">Front End Programmer</p><br>
+        <p>One of the main creators of the website. Im 13 and from UK.</p><center><button class="button1"><a href="#"><font color="white">Edit Description</font></a></button></center>
+        <br><p>example@example.com</p>
           <p><button class="button"><a href="#"><font color="white">Back to Profiles</font></a></button></p>
       </div>
     </div>
@@ -136,16 +151,12 @@ html {
     <div id="Demo" class="w3-dropdown-content w3-bar-block w3-card-4 w3-animate-zoom">
       <a href="plugins.html" class="w3-bar-item w3-button">Plugins</a>
       <a href="mods.html" class="w3-bar-item w3-button">Mods</a>
- 
-        
-
+      
     </div>
   </div>
 </div>
-    <center><p>Edit Profile<img3 src="../images/Settings.png" alt="John" style="width:30%"></img3></p></center>
-    <br><br><br><br>
-
-    <script>
+<br><br><br><br>
+<script>
 function myFunction() {
     var x = document.getElementById("Demo");
     if (x.className.indexOf("w3-show") == -1) {
@@ -156,4 +167,4 @@ function myFunction() {
 }
 </script>
    
-    
+
