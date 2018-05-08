@@ -16,10 +16,10 @@ module.exports.getplugins = function getplugins(db){
     });
 }
 
-module.exports.addplugin = function addplugin(db, addtitle, addapp, adddescription, addlanguage, adduser){
+module.exports.addplugin = function addplugin(db, addtitle, addapp, adddescription, addlanguage, adduser, addemail){
     var pluginsDB = db.collection('plugins');
     //Insert into database.
-    pluginsDB.insert({userName: adduser, game: addapp, title: addtitle, description: adddescription, language: addlanguage});
+    pluginsDB.insert({userName: adduser, game: addapp, title: addtitle, description: adddescription, language: addlanguage, email: addemail});
     module.exports.pluginres = 'Success';
 }
 

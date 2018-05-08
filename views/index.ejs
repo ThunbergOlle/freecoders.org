@@ -67,9 +67,22 @@
             <% } else { %>
             <a type="button bg-light" class="btn btn-outline-success" id="btnIndexPOS" href="plugins">Explore</a>
             <% } %>
+            
             </div>
   
         </div>
+        <% if(email != undefined){ %>
+        <!-- Modal for joining the project goes here.-->
+        <div class="row">
+            <div class="col"></div>
+        <div class="col"><div class="alert alert-success alert-dismissible fade show ">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Success!</strong> Email sent to the user's email.
+        </div>
+        </div>
+        <div class="col"></div>
+        </div>
+        <%}%>
         <div class="container marketing centerSlogan">
 
       <!-- Three columns of text below the carousel -->

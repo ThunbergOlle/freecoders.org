@@ -17,6 +17,7 @@ console.log('MODULES: OK'.green);
 //Gets all the modules.
 var plugins = require('./modules/plugins.js');
 var users = require('./modules/users.js');
+var mail = require('./modules/email.js');
 console.log('EXTERNAL MODULES: OK'.green);
 mongo.connect("mongodb://127.0.0.1/freecoders", function(err, db){
     console.log('DATABASE: OK'.green);
@@ -48,7 +49,8 @@ app.get('/', function(req, res){
     console.log('Someone connected.'.green);
     res.render('index', {
         title: 'FreeCoders', //Passing the title and the current user's id.
-        user: req.session.userName
+        user: req.session.userName,
+        email: undefined
     });
 });
 app.get('/privacy', function(req, res){
@@ -101,6 +103,18 @@ app.get('/profile:name', function(req, res) {
             }
         }
     setTimeout(check, 100); 
+});
+app.get('/joined:email', function(req, res){
+    var target = req.params.email;
+    var user = req.session.userName;
+    var email = req.session.email;
+    var subject = 'Someone wants to join your project.';
+    var text = 'Hello, This is an automated email sent by our bot on FreeCoders. We just wanted to tell you that someone with the user name of: ' + user + ' wants to join your project. If you are intersted please email his adress: ' + email + '. (We recommend checking his profile first.)';
+    mail.sendreq(target, subject, text);
+    res.render('index', {
+        user: req.session.userName,
+        email: target,
+    });
 });
 app.get('/plugininfo:id', function(req, res) {
     var pluginid = req.params.id;
@@ -188,7 +202,8 @@ app.get('/pluginscsharp', function(req, res){
 });
 app.get('/index', function(req, res){
     res.render('index', {
-        user: req.session.userName
+        user: req.session.userName,
+        email: undefined
     });
 });
 app.get('/myprofile', function(req, res) {
@@ -217,6 +232,7 @@ app.post('/users/add', function(req, res){
     codedb.insert({user: newUser, email: newEmail, password: newPwd, language: newLanguage, developer: newDeveloper, description: newDesc});
     console.log('A user signed up with the username '.green + newUser.yellow + ' with the email '.green + newEmail.yellow);
     req.session.userName = newUser;
+    req.session.email = newEmail;
     res.redirect('/');
     console.log('Hashed the password: '.green + newPwd.yellow);
     } else {
@@ -243,9 +259,18 @@ app.post('/users/login', function(req, res){
                     //If we are logged in to the site.
                     console.log('Someone successfully logged into the website. The username is: '.green + usr.yellow);
                     //Sets up a new sessions & variables
-                    user_id = usr;
-                    req.session.userName = user_id;
-                    res.redirect('/');
+                    users.getemail(db, usr);
+                    //Get email of user:
+                    function check(){
+                        if(users.emailres != undefined){
+                            var recievedEmail = users.emailres;
+                            user_id = usr;
+                            req.session.email = recievedEmail;
+                            req.session.userName = user_id;
+                            res.redirect('/');
+                        }
+                    }
+            setTimeout(check, 100);
 
                 } else {
                     //OOPS, wrong password :///
@@ -269,8 +294,9 @@ app.post('/plugins/register', function(req, res){
     var adddescription = req.body.description;
     var addlanguage = req.body.language;
     var adduser = req.session.userName;
+    var addemail = req.session.email;
     //Adds the plugin to the database
-    plugins.addplugin(db, addtitle, addapp, adddescription, addlanguage, adduser);
+    plugins.addplugin(db, addtitle, addapp, adddescription, addlanguage, adduser, addemail);
     plugins.getplugins(db);
     res.redirect('/plugins');
 });

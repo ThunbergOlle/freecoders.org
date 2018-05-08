@@ -22,3 +22,11 @@ module.exports.getprofile = function profile(db, name){
         module.exports.profileres = res; //reponse that the server will recieve.
     });
 }
+module.exports.getemail = function email(db, user){
+    var usersDB = db.collection('freecoders');
+    usersDB.findOne({user: user}, function(err, result){
+        if(err) throw err;
+        //console.log(result.email);
+        module.exports.emailres = result.email;
+    });
+}
