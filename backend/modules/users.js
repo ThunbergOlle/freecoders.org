@@ -30,3 +30,11 @@ module.exports.getemail = function email(db, user){
         module.exports.emailres = result.email;
     });
 }
+module.exports.myprofile = function myprofile(db, loggedin){
+    var usersDB  = db.collection('freecoders');
+    usersDB.findOne({user: loggedin}, function(err, result) {
+        if(err) throw err;
+
+        module.exports.myprofileres = result;
+    });
+}

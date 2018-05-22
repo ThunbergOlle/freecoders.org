@@ -207,9 +207,20 @@ app.get('/index', function(req, res){
     });
 });
 app.get('/myprofile', function(req, res) {
-    res.render('myprofile', {
-        user: req.session.userName
-    });
+    users.myprofile(db, req.session.userName);
+    function check(){
+        if(users.myprofileres != undefined){
+            recievedmyProfile = users.myprofileres;
+            res.render('myprofile', {
+                user: req.session.userName,
+                profile: recievedmyProfile
+            });
+            recievedProfile = '';
+        }
+    }
+
+    setTimeout(check, 200);
+
 });
 
 //Catch Submition

@@ -44,5 +44,12 @@
                 </form>
             </div>
         </nav>
+        <div class="container centerSlogan">
+            <h2 class="display-3"><%= profile.user %></h2>
+            <h4 class="font-weight-light"><%= profile.email %></h4>
+            <p>Preferred Language: <%= profile.language %> | Type: <%= profile.developer %></p>
+            <div class="desc"><p><%= profile.description %></p></div>
+            <a href="#" class="btn btn-info paddingbtns">Edit Profile</a><a href="#" class="btn btn-success paddingbtns">Settings</a><a href="#" class="btn btn-danger paddingbtns">Logout</a>
+        </div>
     </body>
 </html>
