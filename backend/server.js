@@ -18,6 +18,7 @@ console.log('MODULES: OK'.green);
 var plugins = require('./modules/plugins.js');
 var users = require('./modules/users.js');
 var mail = require('./modules/email.js');
+var socket = require('./modules/socketserver.js');
 console.log('EXTERNAL MODULES: OK'.green);
 mongo.connect("mongodb://127.0.0.1/freecoders", function(err, db){
     console.log('DATABASE: OK'.green);

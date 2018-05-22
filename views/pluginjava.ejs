@@ -72,6 +72,7 @@
 </th>
         <th>Username</th>
         <th>Title</th> 
+        <th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -81,6 +82,7 @@
                 <td id="<%= plugins[i].language %>"><%= plugins[i].language %></td>
                 <td><a href="/profile <%= plugins[i].userName %>"><%= plugins[i].userName %></a></td>
                 <td><%= plugins[i].title %></td>
+                <td><a class="btn btn-success" href="/plugininfo <%= plugins[i]._id %>">Join</a></td>
             </tr>
         <%}%>
     </tbody>
